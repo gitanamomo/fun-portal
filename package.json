@@ -1,0 +1,12 @@
+{
+  "name": "fun-portal",
+  "version": "1.0.0",
+  "description": "Cute Cyber Personal Entertainment Hub - 免注册、高品质、全球精选（影视/音乐/小说/游戏/俄系神站）",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": ["entertainment", "streaming", "music", "books", "games", "vercel", "portal"],
+  "author": "gitana",
+  "license": "MIT"
+}
