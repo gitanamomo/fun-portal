@@ -182,12 +182,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const allData = [...(window.ENTERTAINMENT_DATA || []), ...customSites];
 
     const filtered = allData.filter(item => {
-      // 分类筛选 (支持主分类、子分类以及 GitHub 开源专区筛选)
+      // 分类筛选 (支持主分类、子分类、Gina自制专题以及 GitHub 开源专区筛选)
       if (currentCategory !== "all") {
         const matchPrimary = item.category === currentCategory;
         const matchSub = item.subCategories && item.subCategories.includes(currentCategory);
         const matchGithub = currentCategory === "github" && item.isGithub === true;
-        if (!matchPrimary && !matchSub && !matchGithub) {
+        const matchGina = currentCategory === "gina" && item.isGina === true;
+        if (!matchPrimary && !matchSub && !matchGithub && !matchGina) {
           return false;
         }
       }
@@ -227,10 +228,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function createCardElement(item) {
     const card = document.createElement("div");
-    card.className = "hub-card";
+    card.className = item.isGina ? "hub-card gina-card" : "hub-card";
 
     // 图标推断 (Emoji + 视觉识别)
     const iconMap = {
+      gina: "👑",
       movie: "🎬",
       music: "🎧",
       book: "📖",
@@ -247,11 +249,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 决定主按钮点击时是直接打开还是自动翻译
     let mainLaunchUrl = item.url;
-    let mainBtnText = "立即打开";
+    let mainBtnText = item.isGina ? "立即畅玩 / 进入" : "立即打开";
 
     if (item.isRussian && currentTranslateLang !== "original") {
       mainLaunchUrl = currentTranslateLang === "zh-CN" ? zhTranslateUrl : enTranslateUrl;
       mainBtnText = currentTranslateLang === "zh-CN" ? "🇨🇳 中文打开" : "🇬🇧 英文打开";
+    }
+
+    // 子游戏/分入口胶囊生成 (例如 Woodland Arcade 的 4 款森林小游戏)
+    let subLinksHtml = "";
+    if (item.subLinks && item.subLinks.length > 0) {
+      const pills = item.subLinks.map(sub =>
+        `<a href="${sub.url}" target="_blank" rel="noopener noreferrer" class="sublink-pill">${escapeHtml(sub.label)}</a>`
+      ).join("");
+      subLinksHtml = `<div class="card-sublinks">${pills}</div>`;
     }
 
     // 标签生成
@@ -262,10 +273,13 @@ document.addEventListener("DOMContentLoaded", () => {
       ? `<span class="vpn-badge need-vpn" title="${item.vpnTip || '需VPN访问'}">🔵 需 VPN</span>`
       : `<span class="vpn-badge direct" title="${item.vpnTip || '国内可直连'}">🟢 直连秒开</span>`;
 
-    // GitHub 星标评分徽章
-    const githubBadgeHtml = item.isGithub && item.githubStars
-      ? `<span class="github-star-badge" title="GitHub 开源星标评分">⭐ ${escapeHtml(item.githubStars)}</span>`
-      : "";
+    // GitHub 星标评分徽章 或 Gina 原创金标
+    let specialBadgeHtml = "";
+    if (item.isGina) {
+      specialBadgeHtml = `<span class="gina-origin-badge" title="Gina 自制原创项目">👑 Gina 原创</span>`;
+    } else if (item.isGithub && item.githubStars) {
+      specialBadgeHtml = `<span class="github-star-badge" title="GitHub 开源星标评分">⭐ ${escapeHtml(item.githubStars)}</span>`;
+    }
 
     // 俄罗斯站点的多语言切换按钮
     let translateActionHtml = "";
@@ -280,12 +294,12 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
 
-    // GitHub 开源仓库按钮
+    // GitHub 开源仓库按钮 (Gina 原创或开源项目均可点击查看仓库)
     let githubRepoBtnHtml = "";
-    if (item.isGithub && item.githubRepo) {
+    if ((item.isGithub || item.isGina) && item.githubRepo) {
       githubRepoBtnHtml = `
-        <a href="${item.githubRepo}" target="_blank" rel="noopener noreferrer" class="github-repo-btn" title="访问 GitHub 开源仓库查看源码与说明">
-          🐙 源码
+        <a href="${item.githubRepo}" target="_blank" rel="noopener noreferrer" class="github-repo-btn" title="访问 GitHub 仓库查看源码与说明">
+          🐙 仓库
         </a>
       `;
     }
@@ -302,11 +316,12 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="card-badges-right">
             ${vpnBadgeHtml}
-            ${githubBadgeHtml}
+            ${specialBadgeHtml}
             ${item.badge ? `<span class="card-badge">${escapeHtml(item.badge)}</span>` : ""}
           </div>
         </div>
         <p class="card-desc">${escapeHtml(item.desc)}</p>
+        ${subLinksHtml}
         <div class="card-tags">${tagsHtml}</div>
       </div>
       <div class="card-actions">
@@ -330,10 +345,11 @@ document.addEventListener("DOMContentLoaded", () => {
     else greeting = "夜深啦，可以点击右侧切换「🌌 星夜极光」柔和护眼色哦 🌙";
 
     const allItems = window.ENTERTAINMENT_DATA || [];
+    const ginaCount = allItems.filter(i => i.isGina).length;
     const githubCount = allItems.filter(i => i.isGithub).length;
 
     if (mascotBubbleText) {
-      mascotBubbleText.innerHTML = `<strong>🌱 娱乐管家：</strong> ${greeting} 已收录 <strong>${allItems.length}</strong> 个免注册神站（含 <strong>${githubCount}</strong> 个 GitHub 开源精品）。`;
+      mascotBubbleText.innerHTML = `<strong>🌱 娱乐管家：</strong> ${greeting} 已收录 <strong>${allItems.length}</strong> 个宝藏站点（含 <strong>👑 ${ginaCount} 款 Gina 原创作品</strong> & <strong>${githubCount} 个 GitHub 开源神作</strong>）。`;
     }
   }
 
