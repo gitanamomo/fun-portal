@@ -1,14 +1,23 @@
 // ============================================================
-// CYBER KAWAII ENTERTAINMENT HUB - 核心交互脚本
+// FRESHJOY ENTERTAINMENT HUB - 清爽多主题与核心交互脚本
 // ============================================================
 
 document.addEventListener("DOMContentLoaded", () => {
+  // 支持的 5 套清爽主题
+  const VALID_THEMES = ["mint", "sky", "peach", "matcha", "nord"];
+
   // 基础状态
   let currentCategory = "all";
   let currentNetwork = "all";
   let searchQuery = "";
-  let currentTranslateLang = localStorage.getItem("fun_trans_lang") || "zh-CN"; // 'zh-CN' 或 'en'
-  let currentTheme = localStorage.getItem("fun_theme") || "dark";
+  let currentTranslateLang = localStorage.getItem("fun_trans_lang") || "zh-CN";
+
+  // 读取已保存的主题，默认采用清爽的「🌿 薄荷晴空 (mint)」
+  let savedTheme = localStorage.getItem("fun_fresh_theme");
+  if (!VALID_THEMES.includes(savedTheme)) {
+    savedTheme = "mint";
+  }
+  let currentTheme = savedTheme;
   let isPlayingRadio = false;
 
   // DOM 元素
@@ -16,7 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("searchInput");
   const categoryTabs = document.querySelectorAll(".tab-btn");
   const networkBtns = document.querySelectorAll(".net-btn");
-  const themeToggleBtn = document.getElementById("themeToggleBtn");
+  const swatchBtns = document.querySelectorAll(".swatch-btn");
+  const mascotAvatar = document.getElementById("mascotAvatar");
   const radioPlayBtn = document.getElementById("radioPlayBtn");
   const waveBars = document.getElementById("waveBars");
   const radioAudio = document.getElementById("radioAudio");
@@ -30,8 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalBtnEn = document.getElementById("modalBtnEn");
 
   // 初始化主题
-  document.documentElement.setAttribute("data-theme", currentTheme);
-  updateThemeIcon();
+  applyTheme(currentTheme);
 
   // 初始化翻译语言选择
   if (translateSelect) {
@@ -47,6 +56,31 @@ document.addEventListener("DOMContentLoaded", () => {
   // ----------------------------------------------------
   // 交互事件监听
   // ----------------------------------------------------
+
+  // 🎨 5套清爽配色点击切换
+  swatchBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetTheme = btn.dataset.themeVal;
+      applyTheme(targetTheme);
+    });
+  });
+
+  // 点击矢量吉祥物头像也可以顺滑轮换主题色
+  if (mascotAvatar) {
+    mascotAvatar.addEventListener("click", () => {
+      const nextIndex = (VALID_THEMES.indexOf(currentTheme) + 1) % VALID_THEMES.length;
+      applyTheme(VALID_THEMES[nextIndex]);
+    });
+  }
+
+  function applyTheme(themeName) {
+    currentTheme = themeName;
+    document.documentElement.setAttribute("data-theme", themeName);
+    localStorage.setItem("fun_fresh_theme", themeName);
+    swatchBtns.forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.themeVal === themeName);
+    });
+  }
 
   // 分类切换
   categoryTabs.forEach(btn => {
@@ -81,18 +115,6 @@ document.addEventListener("DOMContentLoaded", () => {
       searchInput.focus();
     }
   });
-
-  // 主题切换
-  themeToggleBtn.addEventListener("click", () => {
-    currentTheme = currentTheme === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", currentTheme);
-    localStorage.setItem("fun_theme", currentTheme);
-    updateThemeIcon();
-  });
-
-  function updateThemeIcon() {
-    themeToggleBtn.innerHTML = currentTheme === "dark" ? "🌙 暗黑赛博" : "☀️ 萌粉甜心";
-  }
 
   // 俄站翻译偏好切换
   if (translateSelect) {
@@ -189,9 +211,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (filtered.length === 0) {
       gridContainer.innerHTML = `
         <div class="empty-state">
-          <div class="empty-state-icon">🐱💫</div>
-          <h3>未找到匹配的宝藏网站</h3>
-          <p>试试换个搜索词，或者重置分类筛选吧~</p>
+          <div class="empty-state-icon">🌿🔍</div>
+          <h3>没有找到匹配的娱乐站点</h3>
+          <p>试试换个关键词，或者切回「全部宝藏」看看吧~</p>
         </div>
       `;
       return;
@@ -207,11 +229,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const card = document.createElement("div");
     card.className = "hub-card";
 
-    // 图标推断
+    // 图标推断 (Emoji + 视觉识别)
     const iconMap = {
       movie: "🎬",
-      music: "🎵",
-      book: "📚",
+      music: "🎧",
+      book: "📖",
       game: "🎮",
       russia: "🇷🇺",
       github: "🐙"
@@ -225,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 决定主按钮点击时是直接打开还是自动翻译
     let mainLaunchUrl = item.url;
-    let mainBtnText = "立即前往";
+    let mainBtnText = "立即打开";
 
     if (item.isRussian && currentTranslateLang !== "original") {
       mainLaunchUrl = currentTranslateLang === "zh-CN" ? zhTranslateUrl : enTranslateUrl;
@@ -237,12 +259,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // VPN 状态徽章
     const vpnBadgeHtml = item.vpn
-      ? `<span class="vpn-badge need-vpn" title="${item.vpnTip || '需VPN访问'}">🟣 需 VPN</span>`
+      ? `<span class="vpn-badge need-vpn" title="${item.vpnTip || '需VPN访问'}">🔵 需 VPN</span>`
       : `<span class="vpn-badge direct" title="${item.vpnTip || '国内可直连'}">🟢 直连秒开</span>`;
 
     // GitHub 星标评分徽章
     const githubBadgeHtml = item.isGithub && item.githubStars
-      ? `<span class="github-star-badge" title="GitHub 开源星标评分">⭐ GitHub ${escapeHtml(item.githubStars)}</span>`
+      ? `<span class="github-star-badge" title="GitHub 开源星标评分">⭐ ${escapeHtml(item.githubStars)}</span>`
       : "";
 
     // 俄罗斯站点的多语言切换按钮
@@ -253,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
           🇷🇺 原版
         </a>
         <a href="${zhTranslateUrl}" target="_blank" rel="noopener noreferrer" class="translate-btn" title="Google 翻译中文字幕/网页">
-          中
+          译中
         </a>
       `;
     }
@@ -289,7 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
       <div class="card-actions">
         <a href="${mainLaunchUrl}" target="_blank" rel="noopener noreferrer" class="launch-btn">
-          <span>🚀</span> ${mainBtnText}
+          <span>✨</span> ${mainBtnText}
         </a>
         ${translateActionHtml}
         ${githubRepoBtnHtml}
@@ -301,17 +323,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function initGreeting() {
     const hour = new Date().getHours();
-    let greeting = "欢迎来到你的私人娱乐次元！";
-    if (hour >= 5 && hour < 12) greeting = "早安！新的一天从美妙的音乐和阅读开始吧 ☕";
-    else if (hour >= 12 && hour < 18) greeting = "午后时光，喝杯下午茶，来部高清电影或玩局游戏放松下~ 🍰";
-    else if (hour >= 18 && hour < 23) greeting = "晚上好！今天辛苦啦，尽情享受属于你的私密娱乐之夜 🎬";
-    else greeting = "夜猫子守护者在此！已为你点亮夜光，记得早点休息哦 🌙";
+    let greeting = "欢迎来到你的清爽娱乐小天地！";
+    if (hour >= 5 && hour < 12) greeting = "早安！清爽的早晨，听首歌或看本好书开启美好一天吧 🌿";
+    else if (hour >= 12 && hour < 18) greeting = "午后好时光！泡杯茶，挑一部超清电影或玩局小游戏放松下 🍵";
+    else if (hour >= 18 && hour < 23) greeting = "晚上好！卸下一天的疲惫，尽情享受你的私人影音游戏时光 🎬";
+    else greeting = "夜深啦，可以点击右侧切换「🌌 星夜极光」柔和护眼色哦 🌙";
 
     const allItems = window.ENTERTAINMENT_DATA || [];
     const githubCount = allItems.filter(i => i.isGithub).length;
 
     if (mascotBubbleText) {
-      mascotBubbleText.innerHTML = `<strong>✨ 娱乐管家：</strong> ${greeting} 当前共收录 <strong>${allItems.length}</strong> 个免注册神站（含 <strong>${githubCount}</strong> 个 GitHub 高星开源神作）。`;
+      mascotBubbleText.innerHTML = `<strong>🌱 娱乐管家：</strong> ${greeting} 已收录 <strong>${allItems.length}</strong> 个免注册神站（含 <strong>${githubCount}</strong> 个 GitHub 开源精品）。`;
     }
   }
 

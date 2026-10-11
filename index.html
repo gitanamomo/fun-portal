@@ -1,48 +1,80 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN" data-theme="mint">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CyberKawaii Hub | 我的私人高清娱乐空间</title>
-  <meta name="description" content="免注册、全免费、高品质全球娱乐神站聚合，涵盖影视、音乐、小说、游戏与俄系宝藏。">
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+  <title>FreshJoy Hub | 我的私人清爽娱乐空间</title>
+  <meta name="description" content="免注册、全免费、高品质全球娱乐神站聚合，涵盖影视、音乐、小说、游戏、俄系宝藏与GitHub殿堂级开源。">
+  <!-- Vector SVG Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
   <!-- Stylesheets -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- 炫彩流光氛围背景 -->
-  <div class="cyber-bg-glow">
-    <div class="glow-orb orb-pink"></div>
-    <div class="glow-orb orb-cyan"></div>
-    <div class="glow-orb orb-purple"></div>
-  </div>
+  <!-- 清爽矢量几何与云朵背景装饰 SVG -->
+  <svg class="bg-vector-decor" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <circle cx="1280" cy="140" r="220" fill="url(#grad1)" opacity="0.35"/>
+    <circle cx="140" cy="720" r="260" fill="url(#grad2)" opacity="0.3"/>
+    <path d="M0 680C320 610 580 790 920 710C1180 650 1320 540 1440 580V900H0V680Z" fill="url(#grad1)" opacity="0.12"/>
+    <defs>
+      <radialGradient id="grad1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1280 140) rotate(90) scale(220)">
+        <stop stop-color="#10B981"/>
+        <stop offset="1" stop-color="#0EA5E9" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="grad2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(140 720) rotate(90) scale(260)">
+        <stop stop-color="#38BDF8"/>
+        <stop offset="1" stop-color="#10B981" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+  </svg>
 
   <div class="app-container">
 
-    <!-- 顶部导航与吉祥物看板 -->
+    <!-- 顶部导航与视觉看板 -->
     <header class="app-header">
       <div class="header-top">
         <div class="brand-section">
-          <div class="mascot-avatar" id="mascotAvatar" title="戳我眨眼！">🐾</div>
+          <!-- 萌趣矢量吉祥物 SVG (小星球耳机猫) -->
+          <div class="mascot-avatar" id="mascotAvatar" title="点我随机切换清爽主题色！">
+            <svg class="mascot-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- 耳机环 -->
+              <path d="M12 34C12 21.8497 20.9543 12 32 12C43.0457 12 52 21.8497 52 34" stroke="currentColor" stroke-width="4" stroke-linecap="round" style="color: var(--accent-primary)"/>
+              <!-- 猫耳 -->
+              <path d="M16 24L14 13L25 19Z" fill="currentColor" style="color: var(--accent-primary)"/>
+              <path d="M48 24L50 13L39 19Z" fill="currentColor" style="color: var(--accent-primary)"/>
+              <!-- 脸部圆盘 -->
+              <rect x="14" y="20" width="36" height="30" rx="15" fill="currentColor" style="color: var(--accent-primary)" opacity="0.16"/>
+              <rect x="14" y="20" width="36" height="30" rx="15" stroke="currentColor" stroke-width="2.8" style="color: var(--accent-primary)"/>
+              <!-- 萌眼与微笑 -->
+              <circle cx="25" cy="33" r="2.6" fill="currentColor" style="color: var(--text-main)"/>
+              <circle cx="39" cy="33" r="2.6" fill="currentColor" style="color: var(--text-main)"/>
+              <path d="M28 39C29.5 41 34.5 41 36 39" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="color: var(--text-main)"/>
+              <!-- 腮红 -->
+              <ellipse cx="21" cy="36.5" rx="2.5" ry="1.5" fill="#FB7185" opacity="0.7"/>
+              <ellipse cx="43" cy="36.5" rx="2.5" ry="1.5" fill="#FB7185" opacity="0.7"/>
+              <!-- 耳机罩 -->
+              <rect x="8" y="29" width="6" height="12" rx="3" fill="currentColor" style="color: var(--accent-secondary)"/>
+              <rect x="50" y="29" width="6" height="12" rx="3" fill="currentColor" style="color: var(--accent-secondary)"/>
+            </svg>
+          </div>
           <div class="title-group">
             <h1>
-              CyberKawaii Hub
-              <span class="title-badge">VIP 私人专线</span>
+              FreshJoy 娱乐空间
+              <span class="title-badge">🌿 零门槛 · 纯净高清</span>
             </h1>
-            <p>免注册 · 超高清 · 全球宝藏 · 俄系神站中文直达 · GitHub 殿堂级开源</p>
+            <p>免注册 · 全球影音小说游戏 · 俄系神站中文直达 · GitHub 殿堂级开源</p>
           </div>
         </div>
 
-        <!-- 顶部操作栏 -->
+        <!-- 顶部右侧快捷操作栏 -->
         <div class="header-actions">
           <!-- 内置 Lofi 音乐播放条 -->
           <div class="lofi-bar" title="内置 Lofi 氛围轻音乐电台">
-            <button class="radio-play-btn" id="radioPlayBtn">▶</button>
+            <button class="radio-play-btn" id="radioPlayBtn" aria-label="Play Lofi Radio">▶</button>
             <div class="radio-info">
-              <span class="radio-name">Lofi 氛围心流</span>
-              <span class="radio-status">Live Stream</span>
+              <span class="radio-name">🎵 Lofi 轻音电台</span>
+              <span class="radio-status">点击伴听</span>
             </div>
             <div class="wave-bars" id="waveBars">
               <div class="wave-bar"></div>
@@ -50,55 +82,77 @@
               <div class="wave-bar"></div>
               <div class="wave-bar"></div>
             </div>
-            <!-- 高清无版权 Lofi 氛围音频流 -->
             <audio id="radioAudio" preload="none" src="https://stream.zeno.fm/f3wvbbqmdg8uv"></audio>
           </div>
 
           <!-- 快捷开源小工具：Moodist 白噪音 & Koodo 阅读器 -->
-          <a href="https://moodist.mvze.net" target="_blank" rel="noopener noreferrer" class="ctrl-btn" style="text-decoration:none;" title="打开 75+ 种沉浸式环境白噪音混音台">
+          <a href="https://moodist.mvze.net" target="_blank" rel="noopener noreferrer" class="ctrl-btn" title="打开 75+ 种沉浸式环境白噪音混音台">
             <span>🌧️</span> 白噪音混音
           </a>
-          <a href="https://web.koodoreader.com" target="_blank" rel="noopener noreferrer" class="ctrl-btn" style="text-decoration:none;" title="免安装打开网页版电子书阅读器">
+          <a href="https://web.koodoreader.com" target="_blank" rel="noopener noreferrer" class="ctrl-btn" title="免安装打开网页版电子书阅读器">
             <span>📖</span> 网页看书器
           </a>
 
           <!-- 翻译工具触发按钮 -->
           <button class="ctrl-btn" id="openToolBtn">
-            <span>🌐</span> 网页翻译器
-          </button>
-
-          <!-- 主题切换按钮 -->
-          <button class="ctrl-btn theme-toggle-btn" id="themeToggleBtn">
-            🌙 暗黑赛博
+            <span>🌐</span> 俄网翻译器
           </button>
         </div>
       </div>
 
-      <!-- 吉祥物问候与俄站翻译偏好设置 -->
-      <div class="mascot-bubble">
+      <!-- 底部栏：管家问候 + 🎨 5种清爽配色自由选 + 俄站语言设置 -->
+      <div class="header-bottom-bar">
         <div class="bubble-text" id="mascotBubbleText">
-          <strong>✨ 娱乐管家：</strong> 加载中...
+          <strong>🌱 娱乐管家：</strong> 加载中...
         </div>
-        <div class="translate-mode-pill">
-          <span>🇷🇺 俄站默认打开方式:</span>
-          <select id="translateSelect" class="translate-select" title="设置点击俄罗斯站点时是否自动翻译">
-            <option value="zh-CN">🇨🇳 自动转中文 (Google)</option>
-            <option value="en">🇬🇧 自动转英文 (English)</option>
-            <option value="original">🇷🇺 保持俄语原版</option>
-          </select>
+
+        <div class="settings-group">
+          <!-- 🎨 5套清爽主题选色器 -->
+          <div class="palette-picker" id="palettePicker" title="随时切换您最舒服的清爽主题色">
+            <span class="palette-label">🎨 选色:</span>
+            <button class="swatch-btn active" data-theme-val="mint">
+              <span class="swatch-dot" style="background: #10b981;"></span>🌿 薄荷晴空
+            </button>
+            <button class="swatch-btn" data-theme-val="sky">
+              <span class="swatch-dot" style="background: #3b82f6;"></span>☁️ 云朵奶蓝
+            </button>
+            <button class="swatch-btn" data-theme-val="peach">
+              <span class="swatch-dot" style="background: #f43f5e;"></span>🍑 蜜桃奶油
+            </button>
+            <button class="swatch-btn" data-theme-val="matcha">
+              <span class="swatch-dot" style="background: #15803d;"></span>🍵 抹茶燕麦
+            </button>
+            <button class="swatch-btn" data-theme-val="nord">
+              <span class="swatch-dot" style="background: #38bdf8;"></span>🌌 星夜极光
+            </button>
+          </div>
+
+          <!-- 俄站翻译偏好设置 -->
+          <div class="translate-mode-pill">
+            <span>🇷🇺 俄站打开:</span>
+            <select id="translateSelect" class="translate-select" title="设置点击俄罗斯站点时是否自动翻译">
+              <option value="zh-CN">🇨🇳 自动转中文</option>
+              <option value="en">🇬🇧 自动转英文</option>
+              <option value="original">🇷🇺 俄语原版</option>
+            </select>
+          </div>
         </div>
       </div>
     </header>
 
     <!-- 搜索与筛选工具栏 -->
     <section class="toolbar-section">
-      <!-- 搜索栏 -->
+      <!-- 矢量搜索图标 + 搜索栏 -->
       <div class="search-box-wrap">
+        <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
         <input 
           type="text" 
           id="searchInput" 
           class="search-input" 
-          placeholder="探索你的娱乐宇宙... 搜索电影、无损音乐、小说名、GitHub开源神作或俄系资源"
+          placeholder="搜索电影、无损音乐、小说、仙剑/红警、GitHub开源神作或俄系资源..."
           autocomplete="off"
         >
         <span class="search-shortcut">⌘ / Ctrl + K</span>
@@ -119,14 +173,14 @@
 
         <!-- 网络过滤 -->
         <div class="network-filters">
-          <button class="net-btn active" data-network="all">全部网络</button>
+          <button class="net-btn active" data-network="all">🌐 全部网络</button>
           <button class="net-btn" data-network="direct">🟢 直连秒开</button>
-          <button class="net-btn" data-network="vpn">🟣 需 VPN</button>
+          <button class="net-btn" data-network="vpn">🔵 需 VPN</button>
         </div>
       </div>
     </section>
 
-    <!-- 卡片展示瀑布网格 -->
+    <!-- 卡片展示网格 -->
     <main class="cards-grid" id="cardsGrid">
       <!-- 动态数据通过 app.js 渲染 -->
     </main>
@@ -134,13 +188,13 @@
     <!-- 底部友情提示与安全指南 -->
     <footer class="app-footer">
       <div class="footer-left">
-        <span class="footer-badge">纯净私密保障</span>
-        <span>推荐搭配 <strong>uBlock Origin</strong> 浏览器扩展，享受 100% 零弹窗极客观影体验</span>
+        <span class="footer-badge">🛡️ 纯净观影贴士</span>
+        <span>推荐搭配开源广告拦截器 <strong>uBlock Origin</strong>，享受 100% 清爽零弹窗体验</span>
       </div>
       <div class="footer-right">
-        <span>Hosted with ❤️ on Vercel</span>
+        <span>FreshJoy Hub · 5套清爽主题随心换</span>
         <span>·</span>
-        <a href="https://github.com/gitanamomo" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub @gitanamomo</a>
+        <a href="https://github.com/gitanamomo/fun-portal" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub @gitanamomo</a>
       </div>
     </footer>
 
@@ -153,13 +207,13 @@
         <h3>🌐 俄罗斯 / 外文网页一键翻译器</h3>
         <button class="modal-close" id="modalClose">✕</button>
       </div>
-      <p style="font-size: 13px; color: var(--text-sub); margin-bottom: 14px;">
-        输入任意俄罗斯或其他外语网站网址，一键调用 Google Web Translate 代理镜像直接阅读中文/英文版：
+      <p style="font-size: 13.5px; color: var(--text-sub); margin-bottom: 14px;">
+        粘贴任意俄罗斯或其他外语网站网址，一键调用 Google Web Translate 转换成清爽中文或英文：
       </p>
       <input type="url" id="modalInputUrl" class="modal-input" placeholder="https://rezka.ag 或者其他俄网链接...">
       <div class="modal-btn-row">
         <button class="launch-btn" id="modalBtnZh" style="flex:1;">🇨🇳 中文翻译打开</button>
-        <button class="launch-btn" id="modalBtnEn" style="flex:1; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));">🇬🇧 英文翻译打开</button>
+        <button class="launch-btn" id="modalBtnEn" style="flex:1;">🇬🇧 英文翻译打开</button>
       </div>
     </div>
   </div>
