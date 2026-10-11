@@ -73,21 +73,37 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const THEME_COLORS = {
+    mint: "#f0f9f6",
+    sky: "#f4f7fb",
+    peach: "#fff8f5",
+    matcha: "#f6f6f0",
+    nord: "#1a202c"
+  };
+
   function applyTheme(themeName) {
     currentTheme = themeName;
     document.documentElement.setAttribute("data-theme", themeName);
     localStorage.setItem("fun_fresh_theme", themeName);
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme && THEME_COLORS[themeName]) {
+      metaTheme.setAttribute("content", THEME_COLORS[themeName]);
+    }
     swatchBtns.forEach(btn => {
-      btn.classList.toggle("active", btn.dataset.themeVal === themeName);
+      const isActive = btn.dataset.themeVal === themeName;
+      btn.classList.toggle("active", isActive);
     });
   }
 
-  // 分类切换
+  // 分类切换（支持 iPhone / iPad 横向滑动自动居中当前标签）
   categoryTabs.forEach(btn => {
     btn.addEventListener("click", () => {
       categoryTabs.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       currentCategory = btn.dataset.category;
+      if (typeof btn.scrollIntoView === "function") {
+        btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      }
       renderCards();
     });
   });
