@@ -75,6 +75,40 @@ window.ENTERTAINMENT_DATA = [
     badge: "👑 Gina 原创游乐场",
     tags: ["旧森林游乐场", "萤火虫", "森林2048", "消消乐", "贪吃蛇"]
   },
+  {
+    id: "gina-cipher-cat",
+    title: "密码猫侦探社 · 黄铜魔盒密室解谜",
+    category: "gina",
+    subCategories: ["gina", "game"],
+    type: "Gina原创解谜",
+    desc: "1930年代复古胶片风密室逃脱解谜冒险！携手猫咪神探菲利克斯，依次破译格言书架机关、黄铜星辰魔盒、三段式重型保险箱与蒸汽朋克密码筒逃出生天。",
+    url: "https://gitanamomo.github.io/cipher-cat-office/",
+    vpn: false,
+    vpnTip: "GitHub Pages 公开托管，国内直连秒开",
+    noSignup: true,
+    isGina: true,
+    githubRepo: "https://github.com/gitanamomo/cipher-cat-office",
+    quality: "🕵️ 1930s 密室解谜 · 中英双语",
+    badge: "👑 Gina 原创解谜",
+    tags: ["密室逃脱", "猫咪侦探", "黄铜魔盒", "蒸汽朋克密码筒"]
+  },
+  {
+    id: "gina-neon-borough",
+    title: "霓虹埠 · NEON BOROUGH 赛博城市模拟",
+    category: "gina",
+    subCategories: ["gina", "game"],
+    type: "Gina原创模拟",
+    desc: "一座不眠的雨夜赛博朋克微缩城市模拟游戏！观察与干预 24 位自主 AI 居民的作息、社交与阵营动态，支持投放全城事件与街头追踪。",
+    url: "https://gitanamomo.github.io/neon-borough/",
+    vpn: false,
+    vpnTip: "GitHub Pages 公开托管，国内直连秒开",
+    noSignup: true,
+    isGina: true,
+    githubRepo: "https://github.com/gitanamomo/neon-borough",
+    quality: "🌃 24位AI居民 · 赛博沙盒",
+    badge: "👑 Gina 赛博沙盒",
+    tags: ["霓虹埠", "赛博朋克", "城市模拟", "自主居民"]
+  },
 
 
   // ================= ▲ Vercel 全球精选公开娱乐与游戏 (实测 200 OK 即点即玩) =================
