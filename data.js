@@ -1,23 +1,56 @@
 // 全球精选免注册、高品质个人娱乐数据库
 // （含 👑 Gina 公开自制专题 + ▲ Vercel 精选即玩库 + 🇷🇺 俄系宝藏 + 🐙 GitHub 高星开源神作）
 window.ENTERTAINMENT_DATA = [
-  // ================= 👑 Gina 公开自制娱乐与游戏专题 (100% 公开 · Vercel 实测秒开) =================
+  // ================= 👑 Gina 公开自制娱乐与创意专题 (100% 公开 · 实测秒开) =================
   {
     id: "gina-guandan",
     title: "GINA 牌友会 · 掼蛋在线",
     category: "gina",
     subCategories: ["gina", "game"],
     type: "Gina原创棋牌",
-    desc: "Gina 自制暖阳会所与中古茶社双场景掼蛋棋牌室！支持本机单人 AI 陪练与在线四人好友联机对战（房间口令：gina），Vercel 托管打开即玩。",
-    url: "https://guandan-party-room.vercel.app",
+    desc: "Gina 自制暖阳会所与中古茶社双场景掼蛋棋牌室！支持本机单人 AI 陪练与在线四人好友联机对战（房间口令：gina），打开大厅即可入座开局。",
+    url: "https://gitanamomo.github.io/guandan-party-room/room.html",
     vpn: false,
-    vpnTip: "Vercel 公开托管，国内直连秒开",
+    vpnTip: "GitHub Pages 公开托管，国内直连秒开",
     noSignup: true,
     isGina: true,
     githubRepo: "https://github.com/gitanamomo/guandan-party-room",
-    quality: "▲ Vercel 公开版 · 口令 gina",
+    quality: "🃏 在线联机大厅 · 口令 gina",
     badge: "👑 Gina 公开代表作",
-    tags: ["掼蛋联机", "单人练习", "国风BGM", "Vercel托管"]
+    tags: ["掼蛋联机", "单人AI陪练", "双场景茶社", "国风BGM"]
+  },
+  {
+    id: "gina-lize-wenyao",
+    title: "丽泽问爻 · 宋式水墨六爻解卦",
+    category: "gina",
+    subCategories: ["gina", "game"],
+    type: "Gina国风互动",
+    desc: "宋式水墨美学风的在线六爻互动小站：写下心中所问，按传统三钱法摇卦六次确定性排盘，由 AI 深度接地气解卦并支持围绕同卦连续追问。",
+    url: "https://lize-wenyao.netlify.app",
+    vpn: false,
+    vpnTip: "Netlify 公开托管，国内直连秒开",
+    noSignup: true,
+    isGina: true,
+    quality: "☯️ 三钱法排盘 · 一事一占",
+    badge: "👑 Gina 国风雅集",
+    tags: ["丽泽问爻", "宋式水墨", "六爻解卦", "互动追问"]
+  },
+  {
+    id: "gina-qingxing-respond",
+    title: "清醒回应 · 潜台词破译与高段位回击",
+    category: "gina",
+    subCategories: ["gina", "game"],
+    type: "Gina互动空间",
+    desc: "免费、隐私优先的关系边界与反操控深度分析助手：输入完整经过与真实对话，获得全景脉络梳理、深层潜台词破译与多维度高段位实战回应。",
+    url: "https://qingxing-respond.netlify.app",
+    vpn: false,
+    vpnTip: "Netlify 公开托管，国内直连秒开",
+    noSignup: true,
+    isGina: true,
+    githubRepo: "https://github.com/gitanamomo/clarity-respond",
+    quality: "🛡️ 潜台词破译 · 零数据留存",
+    badge: "👑 Gina 爆款工具",
+    tags: ["清醒回应", "潜台词破译", "关系边界", "高情商回击"]
   },
   {
     id: "gina-woodland-arcade",
