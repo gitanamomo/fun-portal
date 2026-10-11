@@ -160,9 +160,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const allData = [...(window.ENTERTAINMENT_DATA || []), ...customSites];
 
     const filtered = allData.filter(item => {
-      // 分类筛选
-      if (currentCategory !== "all" && item.category !== currentCategory) {
-        return false;
+      // 分类筛选 (支持主分类、子分类以及 GitHub 开源专区筛选)
+      if (currentCategory !== "all") {
+        const matchPrimary = item.category === currentCategory;
+        const matchSub = item.subCategories && item.subCategories.includes(currentCategory);
+        const matchGithub = currentCategory === "github" && item.isGithub === true;
+        if (!matchPrimary && !matchSub && !matchGithub) {
+          return false;
+        }
       }
       // 网络筛选
       if (currentNetwork === "direct" && item.vpn === true) {
@@ -208,7 +213,8 @@ document.addEventListener("DOMContentLoaded", () => {
       music: "🎵",
       book: "📚",
       game: "🎮",
-      russia: "🇷🇺"
+      russia: "🇷🇺",
+      github: "🐙"
     };
     const icon = iconMap[item.category] || "✨";
 
@@ -234,6 +240,11 @@ document.addEventListener("DOMContentLoaded", () => {
       ? `<span class="vpn-badge need-vpn" title="${item.vpnTip || '需VPN访问'}">🟣 需 VPN</span>`
       : `<span class="vpn-badge direct" title="${item.vpnTip || '国内可直连'}">🟢 直连秒开</span>`;
 
+    // GitHub 星标评分徽章
+    const githubBadgeHtml = item.isGithub && item.githubStars
+      ? `<span class="github-star-badge" title="GitHub 开源星标评分">⭐ GitHub ${escapeHtml(item.githubStars)}</span>`
+      : "";
+
     // 俄罗斯站点的多语言切换按钮
     let translateActionHtml = "";
     if (item.isRussian) {
@@ -243,6 +254,16 @@ document.addEventListener("DOMContentLoaded", () => {
         </a>
         <a href="${zhTranslateUrl}" target="_blank" rel="noopener noreferrer" class="translate-btn" title="Google 翻译中文字幕/网页">
           中
+        </a>
+      `;
+    }
+
+    // GitHub 开源仓库按钮
+    let githubRepoBtnHtml = "";
+    if (item.isGithub && item.githubRepo) {
+      githubRepoBtnHtml = `
+        <a href="${item.githubRepo}" target="_blank" rel="noopener noreferrer" class="github-repo-btn" title="访问 GitHub 开源仓库查看源码与说明">
+          🐙 源码
         </a>
       `;
     }
@@ -259,6 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="card-badges-right">
             ${vpnBadgeHtml}
+            ${githubBadgeHtml}
             ${item.badge ? `<span class="card-badge">${escapeHtml(item.badge)}</span>` : ""}
           </div>
         </div>
@@ -270,6 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <span>🚀</span> ${mainBtnText}
         </a>
         ${translateActionHtml}
+        ${githubRepoBtnHtml}
       </div>
     `;
 
@@ -284,8 +307,11 @@ document.addEventListener("DOMContentLoaded", () => {
     else if (hour >= 18 && hour < 23) greeting = "晚上好！今天辛苦啦，尽情享受属于你的私密娱乐之夜 🎬";
     else greeting = "夜猫子守护者在此！已为你点亮夜光，记得早点休息哦 🌙";
 
+    const allItems = window.ENTERTAINMENT_DATA || [];
+    const githubCount = allItems.filter(i => i.isGithub).length;
+
     if (mascotBubbleText) {
-      mascotBubbleText.innerHTML = `<strong>✨ 娱乐管家：</strong> ${greeting} 当前共收录 <strong>${(window.ENTERTAINMENT_DATA || []).length}</strong> 个免注册神站。`;
+      mascotBubbleText.innerHTML = `<strong>✨ 娱乐管家：</strong> ${greeting} 当前共收录 <strong>${allItems.length}</strong> 个免注册神站（含 <strong>${githubCount}</strong> 个 GitHub 高星开源神作）。`;
     }
   }
 
