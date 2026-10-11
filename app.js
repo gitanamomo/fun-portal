@@ -3,8 +3,15 @@
 // ============================================================
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 支持的 5 套清爽主题
+  // 支持的 5 套清爽主题与状态栏颜色
   const VALID_THEMES = ["mint", "sky", "peach", "matcha", "nord"];
+  const THEME_COLORS = {
+    mint: "#f0f9f6",
+    sky: "#f4f7fb",
+    peach: "#fff8f5",
+    matcha: "#f6f6f0",
+    nord: "#1a202c"
+  };
 
   // 基础状态
   let currentCategory = "all";
@@ -72,14 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
       applyTheme(VALID_THEMES[nextIndex]);
     });
   }
-
-  const THEME_COLORS = {
-    mint: "#f0f9f6",
-    sky: "#f4f7fb",
-    peach: "#fff8f5",
-    matcha: "#f6f6f0",
-    nord: "#1a202c"
-  };
 
   function applyTheme(themeName) {
     currentTheme = themeName;
