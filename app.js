@@ -94,15 +94,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 分类切换（支持 iPhone / iPad 横向滑动自动居中当前标签）
+  // 分类切换
   categoryTabs.forEach(btn => {
     btn.addEventListener("click", () => {
       categoryTabs.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       currentCategory = btn.dataset.category;
-      if (typeof btn.scrollIntoView === "function") {
-        btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-      }
       renderCards();
     });
   });

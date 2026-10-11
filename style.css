@@ -1108,13 +1108,10 @@ input {
 
   .palette-picker {
     flex: 1;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .palette-picker::-webkit-scrollbar {
-    display: none;
+    flex-wrap: wrap;
+    padding: 6px 10px;
+    border-radius: 14px;
+    gap: 6px;
   }
   .palette-label,
   .swatch-btn {
@@ -1122,7 +1119,7 @@ input {
     white-space: nowrap;
   }
 
-  /* iPad 分类栏：顺滑单行横向触控滑动 + 右侧网络切换 */
+  /* iPad 分类栏：8个栏位自动排布为整齐的 2行 x 4列 网格 */
   .filter-row {
     flex-direction: column;
     align-items: stretch;
@@ -1130,20 +1127,17 @@ input {
   }
 
   .category-tabs {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-bottom: 2px;
-  }
-  .category-tabs::-webkit-scrollbar {
-    display: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
   }
 
   .tab-btn {
-    flex-shrink: 0;
+    justify-content: center;
+    text-align: center;
     white-space: nowrap;
-    padding: 9px 16px;
+    padding: 9px 10px;
   }
 
   .network-filters {
@@ -1241,7 +1235,7 @@ input {
     border-radius: 12px;
   }
 
-  /* iPhone 问候语 + 5套主题横向顺滑切换 + 俄站翻译设置 */
+  /* iPhone 问候语 + 5套主题双行网格切换 + 俄站翻译设置 */
   .header-bottom-bar {
     flex-direction: column;
     align-items: stretch;
@@ -1265,28 +1259,28 @@ input {
 
   .palette-picker {
     width: 100%;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: 5px 8px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 6px;
     gap: 6px;
-  }
-  .palette-picker::-webkit-scrollbar {
-    display: none;
+    border-radius: 14px;
   }
 
   .palette-label {
-    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     white-space: nowrap;
     font-size: 11.5px;
+    margin-right: 0;
   }
 
   .swatch-btn {
-    flex-shrink: 0;
+    justify-content: center;
     white-space: nowrap;
-    padding: 5px 10px;
-    font-size: 12px;
+    padding: 6px 4px;
+    font-size: 11.5px;
+    border-radius: 10px;
   }
 
   .translate-mode-pill {
@@ -1329,25 +1323,33 @@ input {
     gap: 10px;
   }
 
-  /* iPhone 分类标签：原生 App 级横向滑动胶囊栏 */
+  /* iPhone 分类标签：3行对称饱满排布（第1行：全部宝藏 + Gina自制；第2行：3栏；第3行：3栏） */
   .category-tabs {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin: 0 -4px;
-    padding: 2px 4px;
-    gap: 7px;
-  }
-  .category-tabs::-webkit-scrollbar {
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+    width: 100%;
   }
 
   .tab-btn {
-    flex-shrink: 0;
+    flex: 1 1 26%;
+    justify-content: center;
+    text-align: center;
     white-space: nowrap;
-    padding: 8px 14px;
-    font-size: 13px;
+    padding: 9px 8px;
+    font-size: 12.5px;
+    border-radius: 12px;
+    gap: 4px;
+  }
+
+  .category-tabs .tab-btn:nth-child(1),
+  .category-tabs .tab-btn:nth-child(2) {
+    flex: 1 1 44%;
+    font-size: 13.5px;
+    padding: 10px 12px;
   }
 
   /* iPhone 网络筛选：iOS 分段控制器风格三等分 */
