@@ -294,16 +294,6 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
 
-    // GitHub 开源仓库按钮 (Gina 原创或开源项目均可点击查看仓库)
-    let githubRepoBtnHtml = "";
-    if ((item.isGithub || item.isGina) && item.githubRepo) {
-      githubRepoBtnHtml = `
-        <a href="${item.githubRepo}" target="_blank" rel="noopener noreferrer" class="github-repo-btn" title="访问 GitHub 仓库查看源码与说明">
-          🐙 仓库
-        </a>
-      `;
-    }
-
     card.innerHTML = `
       <div>
         <div class="card-header">
@@ -329,7 +319,6 @@ document.addEventListener("DOMContentLoaded", () => {
           <span>✨</span> ${mainBtnText}
         </a>
         ${translateActionHtml}
-        ${githubRepoBtnHtml}
       </div>
     `;
 
